@@ -29,8 +29,6 @@ class SaveFragment : BaseMvpFragment<SaveView.View, SaveView.Presenter>(), SaveV
         imageTranslate.setImageBitmap(t)
     }
 
-
-
     override fun showErrorMessage(e: Throwable?, dismissCallback: (() -> Unit)?) {}
 
     override fun showErrorMessage(messageRes: Int) {}

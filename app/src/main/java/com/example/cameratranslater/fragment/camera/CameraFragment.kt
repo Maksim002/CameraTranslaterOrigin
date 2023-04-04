@@ -8,17 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.camerakit.CameraKitView
+import com.camerakit.CameraKitView.CameraListener
 import com.example.cameratranslater.R
 import com.example.cameratranslater.base.BaseMvpFragment
 import kotlinx.android.synthetic.main.fragment_camera.*
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.fragment_camera.view.*
 
 
 class CameraFragment : BaseMvpFragment<CameraView.View, CameraView.Presenter>(), CameraView.View {
 
     override var presenter: CameraView.Presenter = CameraPresenter()
-//    private lateinit var db: AppDataBase
-    private val simpleDateTime = SimpleDateFormat("yyyy.MM.dd h:mm")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +36,7 @@ class CameraFragment : BaseMvpFragment<CameraView.View, CameraView.Presenter>(),
 
     private fun initClick() {
         btnPhoto.setOnClickListener {
-            camera.captureImage {_, bytes ->
+            camera.captureImage {ths, bytes ->
                 val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                 ivCrop.setImageToCrop(bitmap)
                 layoutCon.isVisible = false
@@ -48,28 +48,18 @@ class CameraFragment : BaseMvpFragment<CameraView.View, CameraView.Presenter>(),
         btnOk.setOnClickListener {
             val args = Bundle()
             args.putByteArray("image", presenter.bitmapToBytes(ivCrop.crop()))
-            findNavController().navigate(R.id.saveFragment, args)
+            findNavController().navigate(R.id.saveFragment, args,)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        camera.onStart()
     }
 
     override fun onResume() {
         super.onResume()
-        camera.onResume()
+        camera.onStart()
     }
 
     override fun onPause() {
-        camera.onPause()
         super.onPause()
-    }
-
-    override fun onStop() {
         camera.onStop()
-        super.onStop()
     }
 
     override fun onRequestPermissionsResult(
