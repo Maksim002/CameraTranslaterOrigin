@@ -16,4 +16,5 @@ class CameraPresenter : BasePresenter<CameraView.View>(), CameraView.Presenter {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         return stream.toByteArray()
     }
+
 }
