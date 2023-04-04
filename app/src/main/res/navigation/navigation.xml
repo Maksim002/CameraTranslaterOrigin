@@ -9,11 +9,11 @@
         android:id="@+id/cameraFragment"
         android:name="com.example.cameratranslater.fragment.camera.CameraFragment"
         android:label="Camera"
-        tools:layout="@layout/fragment_blank_one"/>
+        tools:layout="@layout/fragment_camera"/>
 
     <fragment
         android:id="@+id/saveFragment"
         android:name="com.example.cameratranslater.fragment.saveImage.SaveFragment"
-        android:label="fragment_save"
+        android:label="Translate"
         tools:layout="@layout/fragment_save" />
 </navigation>
